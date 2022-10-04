@@ -1,6 +1,6 @@
 [workspace]
 
 members = [
-    "shitfile_lib",
+    "ciebii_lib",
     "client",
 ]

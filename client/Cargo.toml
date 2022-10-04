@@ -1,5 +1,5 @@
 [package]
-name = "shf"
+name = "cib"
 version = "0.1.0"
 edition = "2021"
 authors = ["Squirrelcoding"]
@@ -13,4 +13,4 @@ clap = { version = "4.0.4", features = ["derive"] }
 colored = "2.0.0"
 image = "0.24.4"
 macroquad = "0.3.24"
-shitfile_lib = { path = "../shitfile_lib" }
+ciebii_lib = { path = "../ciebii_lib" }

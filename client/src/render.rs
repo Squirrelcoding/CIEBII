@@ -1,12 +1,15 @@
+
 use std::{path::Path, thread, time::Duration};
 
 use macroquad::{
     shapes::draw_rectangle,
-    window::{next_frame, Conf},
+    window::{next_frame, Conf}, miniquad::conf::Icon,
 };
-use shitfile_lib::io::read_file;
+use ciebii_lib::io::read_file;
 
 use colored::*;
+
+use crate::icons;
 
 pub fn render(file_name: String) -> anyhow::Result<()> {
     let shf = read_file(Path::new(&file_name));
@@ -23,9 +26,14 @@ pub fn render(file_name: String) -> anyhow::Result<()> {
 
     macroquad::Window::from_config(
         Conf {
-            window_title: "shitfile viewer".to_owned(),
+            window_title: "ciebii file viewer".to_owned(),
             window_width: width as i32,
             window_height: height as i32,
+            icon: Some(Icon {
+                small: icons::SMALL_ICON,
+                medium: icons::MEDIUM_ICON,
+                big: icons::LARGE_ICON,
+            }),
             ..Default::default()
         },
         async move {
@@ -60,5 +68,4 @@ pub fn render(file_name: String) -> anyhow::Result<()> {
 
     Ok(())
 }
-
-// CIEBII
+// 

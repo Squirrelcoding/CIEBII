@@ -3,7 +3,7 @@ use std::{fs::File, path::Path};
 use anyhow::Context;
 use colored::*;
 use image::GenericImageView;
-use shitfile_lib::{chunk::Chunk, file::SHITFILE, io::write_file};
+use ciebii_lib::{chunk::Chunk, file::CIEBIIFILE, io::write_file};
 
 pub fn convert(i: &str, o: &str) -> anyhow::Result<()> {
     let o = Path::new(o);
@@ -27,9 +27,9 @@ pub fn convert(i: &str, o: &str) -> anyhow::Result<()> {
     println!("🌈 {}", "Converting colors...".bold());
 
     println!("⚒️ {}",  "constructing file...".bold());
-    let shitfile = SHITFILE::try_from_chunks(width, height, chunks)?;
+    let ciebii_file = CIEBIIFILE::try_from_chunks(width, height, chunks)?;
 
-    write_file(Path::new(o), &shitfile)?;
+    write_file(Path::new(o), &ciebii_file)?;
     println!("💾 {}",  "saving file...".bold());
 
     Ok(())

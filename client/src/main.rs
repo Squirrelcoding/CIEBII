@@ -1,12 +1,13 @@
 mod convert;
 mod render;
+mod icons;
 
 use clap::{Parser, Subcommand};
 use colored::*;
 use macroquad::prelude::*;
 use render::render;
 
-/// ✨ Shitfile viewer ✨
+/// ✨ Ciebii file viewer ✨
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
@@ -16,12 +17,12 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-    /// Renders a shitfile
+    /// Renders a ciebii file
     Render {
         file_name: String,
     },
 
-    /// Converts a PNG/JPG file into a shitfile
+    /// Converts a PNG/JPG file into a ciebii file
     Convert {
         i: String,
         o: String,
