@@ -1,6 +1,8 @@
 mod convert;
-mod render;
 mod icons;
+mod render;
+
+use std::path::Path;
 
 use clap::{Parser, Subcommand};
 use colored::*;
@@ -18,15 +20,10 @@ struct Args {
 #[derive(Debug, Subcommand)]
 enum Commands {
     /// Renders a ciebii file
-    Render {
-        file_name: String,
-    },
+    Render { file_name: String },
 
     /// Converts a PNG/JPG file into a ciebii file
-    Convert {
-        i: String,
-        o: String,
-    },
+    Convert { i: String },
 }
 
 fn main() -> anyhow::Result<()> {
@@ -36,30 +33,26 @@ fn main() -> anyhow::Result<()> {
         Commands::Render { file_name } => {
             render(file_name.to_owned())?;
         }
-        Commands::Convert { i, o } => match convert::convert(i, o) {
+        Commands::Convert { i } => match convert::convert(i) {
             Ok(_) => {
                 println!(
-                    "✨ {} {} {} {}{}",
+                    "✨ {} {}{}",
                     "Successfully converted".green().bold(),
                     format!("'{}'", i).white().bold(),
-                    "to".green().bold(),
-                    format!("'{}'", o).white().bold(),
-                    "!".green().bold(),
+                    "!".green().bold()
                 );
             }
             Err(err) => {
                 println!(
-                    "{} {} {} {}{}",
+                    "{} {}{}",
                     "Failed to convert".red().bold(),
                     format!("'{}'", i).white().bold(),
-                    "to".red().bold(),
-                    format!("'{}'", o).white().bold(),
-                    ".".red().bold(),
+                    ".".red().bold()
                 );
 
                 eprintln!("{err}");
 
-                std::fs::remove_file(o)?;
+                std::fs::remove_file(Path::new(i).file_stem().unwrap().to_str().unwrap())?;
             }
         },
     }
